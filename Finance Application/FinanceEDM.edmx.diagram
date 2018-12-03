@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6aea3f1dae1947589899f1140eeaa199" Name="Diagram1" >
+        <EntityTypeShape EntityType="FinanceEDM.UserDetails" Width="1.5" PointX="6.25" PointY="1.125" />
+        <EntityTypeShape EntityType="FinanceEDM.PayerPayee" Width="1.5" PointX="9.125" PointY="3" />
+        <EntityTypeShape EntityType="FinanceEDM.Transaction" Width="1.5" PointX="11.5" PointY="1.125" />
+        <AssociationConnector Association="FinanceEDM.UserDetailsPayerPayee" />
+        <AssociationConnector Association="FinanceEDM.TransactionPayerPayee" />
+        <AssociationConnector Association="FinanceEDM.UserDetailsTransaction" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
