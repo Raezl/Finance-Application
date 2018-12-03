@@ -4,11 +4,96 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="FinanceEDM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="FinanceEDMTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="FinanceEDM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FinanceEDMStoreContainer">
+    <EntitySet Name="UserDetails" EntityType="FinanceEDM.Store.UserDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PayerPayees" EntityType="FinanceEDM.Store.PayerPayees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transactions" EntityType="FinanceEDM.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserDetailsPayerPayee" Association="FinanceEDM.Store.UserDetailsPayerPayee">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="PayerPayee" EntitySet="PayerPayees" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionPayerPayee" Association="FinanceEDM.Store.TransactionPayerPayee">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="PayerPayee" EntitySet="PayerPayees" />
+    </AssociationSet>
+    <AssociationSet Name="UserDetailsTransaction" Association="FinanceEDM.Store.UserDetailsTransaction">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayerPayees">
+    <Key>
+      <PropertyRef Name="PPId" />
+    </Key>
+    <Property Name="PPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Recuring" Type="bit" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="TransactionType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
+    <Property Name="PayerPayee_PPId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserDetailsPayerPayee">
+    <End Role="UserDetails" Type="FinanceEDM.Store.UserDetails" Multiplicity="1" />
+    <End Role="PayerPayee" Type="FinanceEDM.Store.PayerPayees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PayerPayee">
+        <PropertyRef Name="UserDetailsUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionPayerPayee">
+    <End Role="Transaction" Type="FinanceEDM.Store.Transactions" Multiplicity="*" />
+    <End Role="PayerPayee" Type="FinanceEDM.Store.PayerPayees" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PayerPayee">
+        <PropertyRef Name="PPId" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="PayerPayee_PPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserDetailsTransaction">
+    <End Role="UserDetails" Type="FinanceEDM.Store.UserDetails" Multiplicity="1" />
+    <End Role="Transaction" Type="FinanceEDM.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="UserDetailsUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="FinanceEDM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -101,13 +186,55 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="FinanceEDM" />
-        <Alias Key="Target" Value="FinanceEDM.Store" />
-        <EntityContainerMapping CdmEntityContainer="FinanceEDMContainer" StorageEntityContainer="FinanceEDMTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FinanceEDMStoreContainer" CdmEntityContainer="FinanceEDMContainer">
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(FinanceEDM.UserDetails)">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayerPayees">
+      <EntityTypeMapping TypeName="IsTypeOf(FinanceEDM.PayerPayee)">
+        <MappingFragment StoreEntitySet="PayerPayees">
+          <ScalarProperty Name="PPId" ColumnName="PPId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserDetailsUserId" ColumnName="UserDetailsUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="IsTypeOf(FinanceEDM.Transaction)">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Recuring" ColumnName="Recuring" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="UserDetailsUserId" ColumnName="UserDetailsUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TransactionPayerPayee" TypeName="FinanceEDM.TransactionPayerPayee" StoreEntitySet="Transactions">
+      <EndProperty Name="PayerPayee">
+        <ScalarProperty Name="PPId" ColumnName="PayerPayee_PPId" />
+      </EndProperty>
+      <EndProperty Name="Transaction">
+        <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -121,6 +248,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

@@ -55,6 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinanceEDM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanceEDM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinanceEDM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanceEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="FinanceEDM.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,8 +76,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PayerPayee.cs">
+      <DependentUpon>FinanceEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction.cs">
+      <DependentUpon>FinanceEDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetails.cs">
+      <DependentUpon>FinanceEDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Views\IncomeExpense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +161,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FinanceEDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FinanceEDM.Context.cs</LastGenOutput>
+      <DependentUpon>FinanceEDM.edmx</DependentUpon>
+    </Content>
+    <Content Include="FinanceEDM.edmx.sql" />
+    <Content Include="FinanceEDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FinanceEDM.cs</LastGenOutput>
+      <DependentUpon>FinanceEDM.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
