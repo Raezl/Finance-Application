@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Finance_Application;
 
 namespace Finance_Application.Views
 {
@@ -15,6 +16,17 @@ namespace Finance_Application.Views
         public Register()
         {
             InitializeComponent();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            UserDetails usr = new UserDetails();
+            usr.Name = txtName.Text;
+            usr.Address = String.Format("{0},{1},{2}", txtStreet1.Text, txtStreet2.Text, txtCity.Text);
+            usr.DOB = dtpDOB.Value;
+            usr.Email = txtEmail.Text;
+            usr.Password = txtPassword.Text;
+            usr.DBWrite(usr);
         }
     }
 }
