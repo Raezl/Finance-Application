@@ -11,14 +11,7 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
-
-    public static class Session
-    {
-        public static string username { get; set; }
-    }
-
+    
     public partial class UserDetails
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,46 +20,17 @@ namespace Finance_Application
             this.PayerPayees = new HashSet<PayerPayee>();
             this.Transactions = new HashSet<Transaction>();
         }
-
+    
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public System.DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PayerPayee> PayerPayees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-
-        public bool DBWrite(UserDetails obj)
-        {
-            using (var context = new FinanceEDMContainer())
-            {
-                context.UserDetails.Add(obj);
-                context.SaveChanges();
-            }
-            return true;
-        }
-
-        public bool LoginAuthentication(String email, String password)
-        {
-            using (var context = new FinanceEDMContainer())
-            {
-                if (context.UserDetails.Where(e => e.Email == email && e.Password == password).Any())
-                {
-                    Session.username = email;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-                    
-            }
-        }
-
-
     }
 }

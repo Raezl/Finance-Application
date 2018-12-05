@@ -26,7 +26,7 @@ namespace Finance_Application.Views
             usr.DOB = dtpDOB.Value;
             usr.Email = txtEmail.Text;
             usr.Password = txtPassword.Text;
-            usr.DBWrite(usr);
+            usr.UserRegister(usr);
         }
     }
 }

@@ -29,7 +29,7 @@
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="DOB" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -40,7 +40,7 @@
     <Property Name="PPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="DOB" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
   </EntityType>
@@ -121,7 +121,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Address" Type="String" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="DOB" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
           <NavigationProperty Name="PayerPayees" Relationship="FinanceEDM.UserDetailsPayerPayee" FromRole="UserDetails" ToRole="PayerPayee" />
@@ -134,7 +134,7 @@
           <Property Name="PPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Address" Type="String" Nullable="false" />
-          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="DOB" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
           <NavigationProperty Name="UserDetail" Relationship="FinanceEDM.UserDetailsPayerPayee" FromRole="PayerPayee" ToRole="UserDetails" />
           <Property Name="UserDetailsUserId" Type="Int32" Nullable="false" />

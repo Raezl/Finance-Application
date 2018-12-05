@@ -23,7 +23,7 @@ namespace Finance_Application
         public int PPId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public System.DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string Email { get; set; }
         public int UserDetailsUserId { get; set; }
     

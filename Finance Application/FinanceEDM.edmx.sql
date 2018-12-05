@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/03/2018 19:29:12
+-- Date Created: 12/05/2018 11:54:17
 -- Generated from EDMX file: C:\Users\yasirulakruwan\source\repos\Finance Application\Finance Application\FinanceEDM.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,29 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_UserDetailsPayerPayee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PayerPayees] DROP CONSTRAINT [FK_UserDetailsPayerPayee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransactionPayerPayee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionPayerPayee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserDetailsTransaction]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_UserDetailsTransaction];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[UserDetails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UserDetails];
+GO
+IF OBJECT_ID(N'[dbo].[PayerPayees]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PayerPayees];
+GO
+IF OBJECT_ID(N'[dbo].[Transactions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Transactions];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -32,7 +50,7 @@ CREATE TABLE [dbo].[UserDetails] (
     [UserId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
-    [DOB] datetime  NOT NULL,
+    [DOB] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL
 );
@@ -43,7 +61,7 @@ CREATE TABLE [dbo].[PayerPayees] (
     [PPId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
-    [DOB] datetime  NOT NULL,
+    [DOB] nvarchar(max)  NOT NULL,
     [Email] nvarchar(max)  NOT NULL,
     [UserDetailsUserId] int  NOT NULL
 );
