@@ -52,7 +52,7 @@
     <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Recuring" Type="bit" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TransactionType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
     <Property Name="PayerPayee_PPId" Type="int" Nullable="false" />
@@ -148,7 +148,7 @@
           <Property Name="Category" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
           <Property Name="Recuring" Type="Boolean" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
           <Property Name="TransactionType" Type="String" Nullable="false" />
           <NavigationProperty Name="PayerPayee" Relationship="FinanceEDM.TransactionPayerPayee" FromRole="Transaction" ToRole="PayerPayee" />
           <NavigationProperty Name="UserDetail" Relationship="FinanceEDM.UserDetailsTransaction" FromRole="Transaction" ToRole="UserDetails" />

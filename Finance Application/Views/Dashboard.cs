@@ -16,5 +16,16 @@ namespace Finance_Application.Views
         {
             InitializeComponent();
         }
+
+        private void btnAddTransaction_Click(object sender, EventArgs e)
+        {
+            new IncomeExpense().Show();
+            new Transaction().WriteXML("01/01/2000");
+        }
+
+        private void btnViewTransaction_Click(object sender, EventArgs e)
+        {
+            new View_Transaction().Show();
+        }
     }
 }

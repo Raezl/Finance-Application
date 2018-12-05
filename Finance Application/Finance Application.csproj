@@ -126,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\IncomeExpense.resx">
       <DependentUpon>IncomeExpense.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,7 +16,7 @@ namespace Finance_Application
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var main = new Views.Login();
+            var main = new Views.Dashboard();
             main.FormClosed += new FormClosedEventHandler(FormClosed);
             main.Show();
             Application.Run();

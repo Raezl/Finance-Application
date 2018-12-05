@@ -12,11 +12,12 @@ namespace Finance_Application
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public static class Session
     {
         public static int SessionID { get; set; }
     }
+
     public partial class UserDetails
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -61,7 +62,7 @@ namespace Finance_Application
         {
             using (var context = new FinanceEDMContainer())
             {
-                var userRecord = context.UserDetails.Where(e => e.Email == email && Password == password);
+                var userRecord = context.UserDetails.Where(e => e.Email == email && e.Password == password);
                 if (userRecord.Any())
                 {
                     Session.SessionID = userRecord.Single().UserId;

@@ -11,7 +11,12 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
+
     
     public partial class Transaction
     {
@@ -19,11 +24,13 @@ namespace Finance_Application
         public string Category { get; set; }
         public string Description { get; set; }
         public bool Recuring { get; set; }
-        public System.DateTime Date { get; set; }
+        public string Date { get; set; }
         public string TransactionType { get; set; }
         public int UserDetailsUserId { get; set; }
-    
+
+        [XmlIgnore]
         public virtual PayerPayee PayerPayee { get; set; }
+        [XmlIgnore]
         public virtual UserDetails UserDetail { get; set; }
 
         public bool AddTransaction(Transaction obj)
@@ -37,6 +44,48 @@ namespace Finance_Application
             return true;
         }
 
+        public void WriteXML(String date)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                Transaction[] records = GetTransaction(date);
+
+                String[] columnname = {"TransactionId", "Category", "Description", "Recuring", "TransactionType", "PayerPayee_PPId" };
+
+               
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                XmlWriter writer = XmlWriter.Create("Transactions.xml", settings);
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Transactions");
+                writer.WriteStartElement("Transaction");
+                writer.WriteAttributeString("Date", date);
+                
+                for (int i = 0; i < records.Length; i++)
+                {
+                    writer.WriteStartElement("Transaction");
+                    
+                    
+                    for (int e = 1; e < columnname.Length; e++)
+                    {
+                        
+                        writer.WriteAttributeString(columnname[e], records[0].GetType().GetProperty(columnname[5]).GetValue(records[0]).ToString());
+                       
+                    }
+                    writer.WriteAttributeString("ID", records[0].GetType().GetProperty(columnname[0]).GetValue(records[0]).ToString());
+                    writer.WriteEndElement();
+                }
+                
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                
+                System.Windows.Forms.MessageBox.Show(records.Length + " " + columnname.Length);
+                writer.Close();
+            }
+
+
+
+        }
         public bool RemoveTransaction(Transaction obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -47,24 +96,30 @@ namespace Finance_Application
             return true;
         }
 
-        public void UpdateTransaction()
-        {
-
-        }
-        
-        public Transaction GetTransaction(String Date)
+        public void UpdateTransaction(int id, Transaction obj)
         {
             using (var context = new FinanceEDMContainer())
             {
-                return context.Transactions.Where(e => e.Date == Date);
+                var record = context.Transactions.SingleOrDefault(e => e.TransactionId == id);
+                record = obj;
             }
-
         }
 
-        public void GetTransaction(int Id)
+        public Transaction[] GetTransaction(String Date)
         {
-
+            using (var context = new FinanceEDMContainer())
+            {
+                return context.Transactions.Where(e => e.Date == Date).ToArray();
+            }
+            
         }
 
+        public Transaction GetTransaction(int Id)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                return context.Transactions.Where(e => e.TransactionId == Id).Single();
+            }
+        }
     }
 }
