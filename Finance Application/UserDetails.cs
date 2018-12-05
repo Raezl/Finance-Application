@@ -11,7 +11,12 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
+    public static class Session
+    {
+        public static int SessionID { get; set; }
+    }
     public partial class UserDetails
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,5 +37,41 @@ namespace Finance_Application
         public virtual ICollection<PayerPayee> PayerPayees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+
+        public bool AddUser(UserDetails obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+
+                var userRecord = context.UserDetails.Where(e => e.Email == obj.Email);
+                if (userRecord.Any())
+                {
+                    return false;
+                }
+                else
+                {
+                    context.UserDetails.Add(obj);
+                    context.SaveChanges();
+                }
+            }
+            return true;
+        }
+
+        public bool LoginAuthentication(String email, String password)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                var userRecord = context.UserDetails.Where(e => e.Email == email && Password == password);
+                if (userRecord.Any())
+                {
+                    Session.SessionID = userRecord.Single().UserId;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

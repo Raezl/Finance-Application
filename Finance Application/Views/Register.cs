@@ -23,10 +23,10 @@ namespace Finance_Application.Views
             UserDetails usr = new UserDetails();
             usr.Name = txtName.Text;
             usr.Address = String.Format("{0},{1},{2}", txtStreet1.Text, txtStreet2.Text, txtCity.Text);
-            usr.DOB = dtpDOB.Value;
+            usr.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
             usr.Email = txtEmail.Text;
             usr.Password = txtPassword.Text;
-            usr.UserRegister(usr);
+            usr.AddUser(usr);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Transaction
     {
@@ -24,5 +25,46 @@ namespace Finance_Application
     
         public virtual PayerPayee PayerPayee { get; set; }
         public virtual UserDetails UserDetail { get; set; }
+
+        public bool AddTransaction(Transaction obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                obj.UserDetailsUserId = Session.SessionID;
+                context.Transactions.Add(obj);
+                context.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool RemoveTransaction(Transaction obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                context.Transactions.Remove(obj);
+                context.SaveChanges();
+            }
+            return true;
+        }
+
+        public void UpdateTransaction()
+        {
+
+        }
+        
+        public Transaction GetTransaction(String Date)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                return context.Transactions.Where(e => e.Date == Date);
+            }
+
+        }
+
+        public void GetTransaction(int Id)
+        {
+
+        }
+
     }
 }
