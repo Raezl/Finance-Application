@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/05/2018 13:23:01
+-- Date Created: 12/06/2018 15:34:13
 -- Generated from EDMX file: C:\Users\yasirulakruwan\source\repos\Finance Application\Finance Application\FinanceEDM.edmx
 -- --------------------------------------------------
 
@@ -20,11 +20,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserDetailsPayerPayee]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PayerPayees] DROP CONSTRAINT [FK_UserDetailsPayerPayee];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TransactionPayerPayee]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_TransactionPayerPayee];
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserDetailsTransaction]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_UserDetailsTransaction];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PayerPayeeTransaction]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Transactions] DROP CONSTRAINT [FK_PayerPayeeTransaction];
 GO
 
 -- --------------------------------------------------
@@ -76,7 +76,7 @@ CREATE TABLE [dbo].[Transactions] (
     [Date] nvarchar(max)  NOT NULL,
     [TransactionType] nvarchar(max)  NOT NULL,
     [UserDetailsUserId] int  NOT NULL,
-    [PayerPayee_PPId] int  NOT NULL
+    [PayerPayeePPId] int  NOT NULL
 );
 GO
 
@@ -121,21 +121,6 @@ ON [dbo].[PayerPayees]
     ([UserDetailsUserId]);
 GO
 
--- Creating foreign key on [PayerPayee_PPId] in table 'Transactions'
-ALTER TABLE [dbo].[Transactions]
-ADD CONSTRAINT [FK_TransactionPayerPayee]
-    FOREIGN KEY ([PayerPayee_PPId])
-    REFERENCES [dbo].[PayerPayees]
-        ([PPId])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_TransactionPayerPayee'
-CREATE INDEX [IX_FK_TransactionPayerPayee]
-ON [dbo].[Transactions]
-    ([PayerPayee_PPId]);
-GO
-
 -- Creating foreign key on [UserDetailsUserId] in table 'Transactions'
 ALTER TABLE [dbo].[Transactions]
 ADD CONSTRAINT [FK_UserDetailsTransaction]
@@ -149,6 +134,21 @@ GO
 CREATE INDEX [IX_FK_UserDetailsTransaction]
 ON [dbo].[Transactions]
     ([UserDetailsUserId]);
+GO
+
+-- Creating foreign key on [PayerPayeePPId] in table 'Transactions'
+ALTER TABLE [dbo].[Transactions]
+ADD CONSTRAINT [FK_PayerPayeeTransaction]
+    FOREIGN KEY ([PayerPayeePPId])
+    REFERENCES [dbo].[PayerPayees]
+        ([PPId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PayerPayeeTransaction'
+CREATE INDEX [IX_FK_PayerPayeeTransaction]
+ON [dbo].[Transactions]
+    ([PayerPayeePPId]);
 GO
 
 -- --------------------------------------------------

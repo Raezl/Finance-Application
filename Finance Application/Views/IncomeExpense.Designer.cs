@@ -50,6 +50,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.numudEntries = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.threadAddTransaction = new System.ComponentModel.BackgroundWorker();
             this.tabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -123,6 +124,7 @@
             // 
             // cboxType
             // 
+            this.cboxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxType.FormattingEnabled = true;
             this.cboxType.Items.AddRange(new object[] {
             "Income",
@@ -271,6 +273,7 @@
             this.btnAdd.TabIndex = 19;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // numudEntries
             // 
@@ -302,6 +305,10 @@
             this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "Number of entries";
+            // 
+            // threadAddTransaction
+            // 
+            this.threadAddTransaction.DoWork += new System.ComponentModel.DoWorkEventHandler(this.threadAddTransaction_DoWork);
             // 
             // IncomeExpense
             // 
@@ -350,5 +357,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.NumericUpDown numudEntries;
         private System.Windows.Forms.Label label1;
+        private System.ComponentModel.BackgroundWorker threadAddTransaction;
     }
 }

@@ -13,12 +13,12 @@
       <End Role="UserDetails" EntitySet="UserDetails" />
       <End Role="PayerPayee" EntitySet="PayerPayees" />
     </AssociationSet>
-    <AssociationSet Name="TransactionPayerPayee" Association="FinanceEDM.Store.TransactionPayerPayee">
-      <End Role="Transaction" EntitySet="Transactions" />
-      <End Role="PayerPayee" EntitySet="PayerPayees" />
-    </AssociationSet>
     <AssociationSet Name="UserDetailsTransaction" Association="FinanceEDM.Store.UserDetailsTransaction">
       <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="PayerPayeeTransaction" Association="FinanceEDM.Store.PayerPayeeTransaction">
+      <End Role="PayerPayee" EntitySet="PayerPayees" />
       <End Role="Transaction" EntitySet="Transactions" />
     </AssociationSet>
   </EntityContainer>
@@ -55,7 +55,7 @@
     <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TransactionType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
-    <Property Name="PayerPayee_PPId" Type="int" Nullable="false" />
+    <Property Name="PayerPayeePPId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserDetailsPayerPayee">
     <End Role="UserDetails" Type="FinanceEDM.Store.UserDetails" Multiplicity="1" />
@@ -66,18 +66,6 @@
       </Principal>
       <Dependent Role="PayerPayee">
         <PropertyRef Name="UserDetailsUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TransactionPayerPayee">
-    <End Role="Transaction" Type="FinanceEDM.Store.Transactions" Multiplicity="*" />
-    <End Role="PayerPayee" Type="FinanceEDM.Store.PayerPayees" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="PayerPayee">
-        <PropertyRef Name="PPId" />
-      </Principal>
-      <Dependent Role="Transaction">
-        <PropertyRef Name="PayerPayee_PPId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -93,6 +81,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PayerPayeeTransaction">
+    <End Role="PayerPayee" Type="FinanceEDM.Store.PayerPayees" Multiplicity="1" />
+    <End Role="Transaction" Type="FinanceEDM.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayerPayee">
+        <PropertyRef Name="PPId" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="PayerPayeePPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -105,12 +105,12 @@
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="PayerPayee" EntitySet="PayerPayees" />
           </AssociationSet>
-          <AssociationSet Name="TransactionPayerPayee" Association="FinanceEDM.TransactionPayerPayee">
-            <End Role="Transaction" EntitySet="Transactions" />
-            <End Role="PayerPayee" EntitySet="PayerPayees" />
-          </AssociationSet>
           <AssociationSet Name="UserDetailsTransaction" Association="FinanceEDM.UserDetailsTransaction">
             <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="PayerPayeeTransaction" Association="FinanceEDM.PayerPayeeTransaction">
+            <End Role="PayerPayee" EntitySet="PayerPayees" />
             <End Role="Transaction" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
@@ -138,7 +138,7 @@
           <Property Name="Email" Type="String" Nullable="false" />
           <NavigationProperty Name="UserDetail" Relationship="FinanceEDM.UserDetailsPayerPayee" FromRole="PayerPayee" ToRole="UserDetails" />
           <Property Name="UserDetailsUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Transactions" Relationship="FinanceEDM.TransactionPayerPayee" FromRole="PayerPayee" ToRole="Transaction" />
+          <NavigationProperty Name="Transactions" Relationship="FinanceEDM.PayerPayeeTransaction" FromRole="PayerPayee" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -150,9 +150,10 @@
           <Property Name="Recuring" Type="Boolean" Nullable="false" />
           <Property Name="Date" Type="String" Nullable="false" />
           <Property Name="TransactionType" Type="String" Nullable="false" />
-          <NavigationProperty Name="PayerPayee" Relationship="FinanceEDM.TransactionPayerPayee" FromRole="Transaction" ToRole="PayerPayee" />
           <NavigationProperty Name="UserDetail" Relationship="FinanceEDM.UserDetailsTransaction" FromRole="Transaction" ToRole="UserDetails" />
           <Property Name="UserDetailsUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PayerPayee" Relationship="FinanceEDM.PayerPayeeTransaction" FromRole="Transaction" ToRole="PayerPayee" />
+          <Property Name="PayerPayeePPId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="UserDetailsPayerPayee">
           <End Type="FinanceEDM.UserDetails" Role="UserDetails" Multiplicity="1" />
@@ -166,10 +167,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TransactionPayerPayee">
-          <End Type="FinanceEDM.Transaction" Role="Transaction" Multiplicity="*" />
-          <End Type="FinanceEDM.PayerPayee" Role="PayerPayee" Multiplicity="1" />
-        </Association>
         <Association Name="UserDetailsTransaction">
           <End Type="FinanceEDM.UserDetails" Role="UserDetails" Multiplicity="1" />
           <End Type="FinanceEDM.Transaction" Role="Transaction" Multiplicity="*" />
@@ -179,6 +176,18 @@
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="UserDetailsUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PayerPayeeTransaction">
+          <End Type="FinanceEDM.PayerPayee" Role="PayerPayee" Multiplicity="1" />
+          <End Type="FinanceEDM.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayerPayee">
+              <PropertyRef Name="PPId" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="PayerPayeePPId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -222,17 +231,10 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
           <ScalarProperty Name="UserDetailsUserId" ColumnName="UserDetailsUserId" />
+          <ScalarProperty Name="PayerPayeePPId" ColumnName="PayerPayeePPId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="TransactionPayerPayee" TypeName="FinanceEDM.TransactionPayerPayee" StoreEntitySet="Transactions">
-      <EndProperty Name="PayerPayee">
-        <ScalarProperty Name="PPId" ColumnName="PayerPayee_PPId" />
-      </EndProperty>
-      <EndProperty Name="Transaction">
-        <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

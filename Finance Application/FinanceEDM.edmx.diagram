@@ -6,11 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6aea3f1dae1947589899f1140eeaa199" Name="Diagram1" >
         <EntityTypeShape EntityType="FinanceEDM.UserDetails" Width="1.5" PointX="6.25" PointY="1.125" />
-        <EntityTypeShape EntityType="FinanceEDM.PayerPayee" Width="1.5" PointX="9.125" PointY="3" />
+        <EntityTypeShape EntityType="FinanceEDM.PayerPayee" Width="1.5" PointX="9.125" PointY="2.875" />
         <EntityTypeShape EntityType="FinanceEDM.Transaction" Width="1.5" PointX="11.5" PointY="1.125" />
         <AssociationConnector Association="FinanceEDM.UserDetailsPayerPayee" />
-        <AssociationConnector Association="FinanceEDM.TransactionPayerPayee" />
         <AssociationConnector Association="FinanceEDM.UserDetailsTransaction" />
+        <AssociationConnector Association="FinanceEDM.PayerPayeeTransaction" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
