@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,15 @@ namespace Finance_Application.Views
         private void btnViewTransaction_Click(object sender, EventArgs e)
         {
             new View_Transaction().Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Transaction().WriteTransactionXML("2018-12-06");
+
+
+            foreach (String a in new Transaction().ReadTransactionXML("2018-12-06"))
+                Debug.WriteLine(a);
         }
     }
 }

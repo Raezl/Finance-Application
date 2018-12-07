@@ -11,7 +11,7 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
     public partial class PayerPayee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,5 +30,42 @@ namespace Finance_Application
         public virtual UserDetails UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+
+        public bool AddPayerPayee(PayerPayee obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                context.PayerPayees.Add(obj);
+                context.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool RemovePayerPayee(PayerPayee obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                context.PayerPayees.Remove(obj);
+                context.SaveChanges();
+            }
+            return true;
+        }
+
+        public void UpdatePayerPayee(int id, PayerPayee obj)
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                var record = context.PayerPayees.SingleOrDefault(e => e.PPId == id);
+                record = obj;
+            }
+        }
+
+        public List<PayerPayee> AllPPRecords()
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                return context.PayerPayees.ToList();
+            }
+        }
     }
 }

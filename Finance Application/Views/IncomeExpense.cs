@@ -17,7 +17,7 @@ namespace Finance_Application.Views
             InitializeComponent();
         }
 
-        private void ClearTextBoxes()
+        private void Clear()
         {
             Action<Control.ControlCollection> func = null;
 
@@ -46,6 +46,7 @@ namespace Finance_Application.Views
             record.TransactionType = cboxType.SelectedText;
             record.UserDetailsUserId = 1;
             record.PayerPayeePPId = 1;
+            
             if (threadAddTransaction.IsBusy != true)
                 threadAddTransaction.RunWorkerAsync(argument: record);
         }
@@ -59,7 +60,7 @@ namespace Finance_Application.Views
         }
         private void threadAddTransaction_RunWorkerCompleted( object sender, RunWorkerCompletedEventArgs e)
         {
-            ClearTextBoxes();
+            Clear();
         }
 
     }

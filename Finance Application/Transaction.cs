@@ -13,6 +13,7 @@ namespace Finance_Application
     using System.Collections.Generic;
     using System.Xml;
     using System.Linq;
+    using System.Diagnostics;
 
     public partial class Transaction
     {
@@ -38,35 +39,49 @@ namespace Finance_Application
             return true;
         }
 
-        public void WriteXML(String date)
+        public List<String> ReadTransactionXML(String date)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\" + date+".xml");
+            XmlNodeList root = xml.GetElementsByTagName("Transaction");
+            List<String> records = new List<String>();
+            for (int i = 0; i< root.Count; i++)
+            {
+                for (int e = 0; e < 6; e++)
+                    records.Add(root[i].Attributes[e].Value);
+            }
+            //foreach (XmlAttribute a in att)
+               //Debug.WriteLine(a.Name +" "+a.Value);
+            return records;
+
+        }
+
+        public void WriteTransactionXML(String date)
         {
             using (var context = new FinanceEDMContainer())
             {
                 Transaction[] records = GetTransaction(date);
 
-                String[] columnname = { "TransactionId", "Category", "Description", "Recuring", "TransactionType", "PayerPayee_PPId" };
+                String[] columnname = { "Category", "Description", "Recuring", "TransactionType", "PayerPayeePPId", "TransactionId" };
 
 
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
-                XmlWriter writer = XmlWriter.Create("Transactions.xml", settings);
+                XmlWriter writer = XmlWriter.Create(date + ".xml", settings);
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Transactions");
-                writer.WriteStartElement("Transaction");
                 writer.WriteAttributeString("Date", date);
 
                 for (int i = 0; i < records.Length; i++)
                 {
                     writer.WriteStartElement("Transaction");
 
-
-                    for (int e = 1; e < columnname.Length; e++)
+                  
+                    for (int e = 0; e < columnname.Length; e++)
                     {
-
-                        writer.WriteAttributeString(columnname[e], records[0].GetType().GetProperty(columnname[5]).GetValue(records[0]).ToString());
-
+                        writer.WriteAttributeString(columnname[e], records[i].GetType().GetProperty(columnname[e]).GetValue(records[i]).ToString());
                     }
-                    writer.WriteAttributeString("ID", records[0].GetType().GetProperty(columnname[0]).GetValue(records[0]).ToString());
+                   
                     writer.WriteEndElement();
                 }
 
