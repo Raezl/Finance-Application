@@ -59,6 +59,7 @@
             this.btnModify.TabIndex = 4;
             this.btnModify.Text = "Modify";
             this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
             // dataGridView1
             // 

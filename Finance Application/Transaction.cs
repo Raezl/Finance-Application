@@ -95,22 +95,30 @@ namespace Finance_Application
 
 
         }
-        public bool RemoveTransaction(Transaction obj)
+        public bool RemoveTransaction(int id)
         {
             using (var context = new FinanceEDMContainer())
             {
-                context.Transactions.Remove(obj);
+                var remove = context.Transactions.Where(e=> e.TransactionId == id).Single();
+                context.Transactions.Remove(remove);
                 context.SaveChanges();
             }
             return true;
         }
 
-        public void UpdateTransaction(int id, Transaction obj)
+        public void UpdateTransaction(Transaction obj)
         {
             using (var context = new FinanceEDMContainer())
             {
-                var record = context.Transactions.SingleOrDefault(e => e.TransactionId == id);
-                record = obj;
+                var record = context.Transactions.SingleOrDefault(e => e.TransactionId == obj.TransactionId);
+                record.Category = obj.Category;
+                record.Date = obj.Date;
+                record.Description = obj.Description;
+                record.PayerPayeePPId = obj.PayerPayeePPId;
+                record.Recuring = obj.Recuring;
+                record.TransactionId = obj.TransactionId;
+                record.TransactionType = obj.TransactionType;
+                context.SaveChanges();
             }
         }
 

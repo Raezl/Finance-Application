@@ -12,6 +12,7 @@ using System.Xml;
 
 namespace Finance_Application.Views
 {
+   
     public partial class View_Transaction : Form
     {
         public View_Transaction()
@@ -33,6 +34,14 @@ namespace Finance_Application.Views
             {
                 dataGridView1.Rows.Add(lst[i], lst[i + 1], lst[i + 2], lst[i + 3], lst[i + 4], lst[i + 5]);
             }
+        }
+
+   
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["Column6"].Value.ToString();
+          
+            Debug.WriteLine(val);
         }
     }
 }

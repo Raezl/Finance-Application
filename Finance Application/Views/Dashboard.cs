@@ -20,7 +20,7 @@ namespace Finance_Application.Views
 
         private void btnAddTransaction_Click(object sender, EventArgs e)
         {
-            new IncomeExpense().Show();
+            new Add_IncomeExpense().Show();
         }
 
         private void btnViewTransaction_Click(object sender, EventArgs e)
@@ -35,6 +35,18 @@ namespace Finance_Application.Views
 
             foreach (String a in new Transaction().ReadTransactionXML("2018-12-06"))
                 Debug.WriteLine(a);
+        }
+
+        private void btnAddPP_Click(object sender, EventArgs e)
+        {
+            new Add_PayerPayee().Show();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Session.SessionID = 0;
+            new Login().Show();
+            this.Close();
         }
     }
 }

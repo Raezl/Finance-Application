@@ -35,6 +35,8 @@ namespace Finance_Application
         {
             using (var context = new FinanceEDMContainer())
             {
+                //obj.UserDetailsUserId = Session.SessionID;
+                obj.UserDetailsUserId = 1;
                 context.PayerPayees.Add(obj);
                 context.SaveChanges();
             }
