@@ -12,6 +12,8 @@ namespace Finance_Application
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml;
+
     public partial class PayerPayee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,14 +21,14 @@ namespace Finance_Application
         {
             this.Transactions = new HashSet<Transaction>();
         }
-    
+
         public int PPId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string DOB { get; set; }
         public string Email { get; set; }
         public int UserDetailsUserId { get; set; }
-    
+
         public virtual UserDetails UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
@@ -67,6 +69,57 @@ namespace Finance_Application
             using (var context = new FinanceEDMContainer())
             {
                 return context.PayerPayees.ToList();
+            }
+        }
+
+        public List<String> ReadPayerPayeeXML(String date)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\PayerPayee.xml");
+            XmlNodeList root = xml.GetElementsByTagName("PayerPayee");
+            List<String> records = new List<String>();
+            for (int i = 0; i < root.Count; i++)
+            {
+                for (int e = 0; e < 6; e++)
+                    records.Add(root[i].Attributes[e].Value);
+            }
+            //foreach (XmlAttribute a in att)
+            //Debug.WriteLine(a.Name +" "+a.Value);
+            return records;
+
+        }
+
+        public void WritePayerPayeeXML()
+        {
+            using (var context = new FinanceEDMContainer())
+            {
+                List<PayerPayee> records = AllPPRecords();
+
+                String[] columnname = { "PPId", "Name", "Address", "DOB", "Email", "UserDetailsUserId" };
+
+
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                XmlWriter writer = XmlWriter.Create("PayerPayee.xml", settings);
+                writer.WriteStartDocument();
+                writer.WriteStartElement("PayerPayee");
+
+                for (int i = 0; i < records.Count; i++)
+                {
+                    writer.WriteStartElement("PayersPayees");
+                    writer.WriteAttributeString(columnname[0], records[i].GetType().GetProperty(columnname[0]).GetValue(records[i]).ToString());
+
+                    for (int e = 1; e < columnname.Length; e++)
+                    {
+                        writer.WriteAttributeString(columnname[e], records[i].GetType().GetProperty(columnname[e]).GetValue(records[i]).ToString());
+                    }
+                    writer.WriteEndElement();
+                }
+
+                writer.WriteEndDocument();
+
+
+                writer.Close();
             }
         }
     }

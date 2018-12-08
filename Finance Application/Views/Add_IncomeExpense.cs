@@ -46,6 +46,7 @@ namespace Finance_Application.Views
             
             if (_IEUControls.Any())
             {
+                Debug.WriteLine("controls"+_IEUControls.Count);
                 foreach(UC_IncomeExpese control in _IEUControls)
                 {
                     Transaction record = new Transaction();

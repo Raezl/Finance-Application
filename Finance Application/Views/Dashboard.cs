@@ -30,11 +30,10 @@ namespace Finance_Application.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new Transaction().WriteTransactionXML("2018-12-06");
+            new PayerPayee().WritePayerPayeeXML();
 
 
-            foreach (String a in new Transaction().ReadTransactionXML("2018-12-06"))
-                Debug.WriteLine(a);
+            
         }
 
         private void btnAddPP_Click(object sender, EventArgs e)
