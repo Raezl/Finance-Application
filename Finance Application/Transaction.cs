@@ -146,6 +146,7 @@ namespace Finance_Application
         {
             using (var context = new FinanceEDMContainer())
             {
+                Debug.WriteLine(Id);
                 return context.Transactions.Where(e => e.TransactionId == Id).Single();
             }
         }

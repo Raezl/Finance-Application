@@ -31,14 +31,14 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpTransactionDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Recuring = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PayerPayeePPId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TransactionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +50,7 @@
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnModify
             // 
@@ -65,53 +66,17 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 49);
+            this.Category,
+            this.Description,
+            this.Recuring,
+            this.TransactionType,
+            this.PayerPayeePPId,
+            this.TransactionId});
+            this.dataGridView1.Location = new System.Drawing.Point(16, 49);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(780, 289);
             this.dataGridView1.TabIndex = 3;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Column5";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Column6";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
             // 
             // dtpTransactionDate
             // 
@@ -129,6 +94,45 @@
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Select Date:";
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // Recuring
+            // 
+            this.Recuring.HeaderText = "Recuring";
+            this.Recuring.Name = "Recuring";
+            this.Recuring.ReadOnly = true;
+            // 
+            // TransactionType
+            // 
+            this.TransactionType.FillWeight = 150F;
+            this.TransactionType.HeaderText = "Transaction Type";
+            this.TransactionType.Name = "TransactionType";
+            this.TransactionType.ReadOnly = true;
+            this.TransactionType.Width = 150;
+            // 
+            // PayerPayeePPId
+            // 
+            this.PayerPayeePPId.HeaderText = "PayerPayeePPId";
+            this.PayerPayeePPId.Name = "PayerPayeePPId";
+            this.PayerPayeePPId.ReadOnly = true;
+            this.PayerPayeePPId.Visible = false;
+            // 
+            // TransactionId
+            // 
+            this.TransactionId.HeaderText = "TransactionId";
+            this.TransactionId.Name = "TransactionId";
+            this.TransactionId.ReadOnly = true;
             // 
             // View_Transaction
             // 
@@ -156,11 +160,11 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker dtpTransactionDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Recuring;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TransactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PayerPayeePPId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TransactionId;
     }
 }

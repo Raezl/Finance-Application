@@ -52,9 +52,24 @@ namespace Finance_Application.Views
    
         private void btnModify_Click(object sender, EventArgs e)
         {
-            string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["Column6"].Value.ToString();
+            string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["TransactionId"].Value.ToString();
             new Edit_Transaction(Convert.ToInt32(val)).Show();
-            Debug.WriteLine(val);
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["TransactionId"].Value.ToString();
+            DialogResult dialogResult = MessageBox.Show("Do you want to delete the selected record?", "Confrim", MessageBoxButtons.YesNo);
+            Transaction obj = new Transaction();
+            if (dialogResult == DialogResult.Yes)
+            {
+                Debug.WriteLine(val);
+                if(obj.RemoveTransaction(Convert.ToInt32(val)))
+                {
+                    new Transaction().WriteTransactionXML(dtpTransactionDate.Value.ToString("yyyy-MM-dd"));
+                }
+            }
         }
     }
 }

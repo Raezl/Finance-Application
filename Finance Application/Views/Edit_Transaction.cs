@@ -41,13 +41,10 @@ namespace Finance_Application.Views
        
         private void Edit_Transaction_Load(object sender, EventArgs e)
         {
-            
             Transaction rec = new Transaction().GetTransaction(transactionId);
             txtCategory.Text = rec.Category;
             dtpTransactionDate.Value = DateTime.Parse(rec.Date);
             rtxtDescription.Text = rec.Description;
-
-           
         }
     }
 }
