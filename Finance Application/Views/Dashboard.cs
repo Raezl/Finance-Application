@@ -13,6 +13,8 @@ namespace Finance_Application.Views
 {
     public partial class Dashboard : Form
     {
+
+        public event EventHandler test;
         public Dashboard()
         {
             InitializeComponent();
@@ -28,12 +30,11 @@ namespace Finance_Application.Views
             new View_Transaction().Show();
         }
 
+        
+
         private void button1_Click(object sender, EventArgs e)
         {
-            new PayerPayee().WritePayerPayeeXML();
-
-
-            
+           
         }
 
         private void btnAddPP_Click(object sender, EventArgs e)

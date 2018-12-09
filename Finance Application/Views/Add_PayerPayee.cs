@@ -19,17 +19,32 @@ namespace Finance_Application.Views
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            PayerPayee pp = new PayerPayee();
-            pp.Name = txtName.Text;
-            pp.Address = txtAddress.Text;
-            pp.Email = txtEmail.Text;
-            pp.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
-
-            if (!ThreadAddPayerPayee.IsBusy)
+            if (String.IsNullOrEmpty(txtAddress.Text))
             {
-                ThreadAddPayerPayee.RunWorkerAsync(argument: pp);
+                MessageBox.Show("Address field cannot be empty");
             }
-                
+            else if (String.IsNullOrEmpty(txtEmail.Text))
+            {
+                MessageBox.Show("Email field cannot be empty");
+            }
+            else if (String.IsNullOrEmpty(txtName.Text))
+            {
+                MessageBox.Show("Name feild cannot be empty");
+            }
+            else
+            {
+                PayerPayee pp = new PayerPayee();
+                pp.Name = txtName.Text;
+                pp.Address = txtAddress.Text;
+                pp.Email = txtEmail.Text;
+                pp.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
+
+                if (!ThreadAddPayerPayee.IsBusy)
+                {
+                    ThreadAddPayerPayee.RunWorkerAsync(argument: pp);
+                }
+
+            }   
 
         }
 

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tabsIncomeExpense = new System.Windows.Forms.TabControl();
-            this.btnBack = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.numudEntries = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,15 +43,6 @@
             this.tabsIncomeExpense.SelectedIndex = 0;
             this.tabsIncomeExpense.Size = new System.Drawing.Size(447, 417);
             this.tabsIncomeExpense.TabIndex = 21;
-            // 
-            // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(299, 456);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
-            this.btnBack.TabIndex = 20;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
@@ -106,7 +96,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 483);
             this.Controls.Add(this.tabsIncomeExpense);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.numudEntries);
             this.Controls.Add(this.label1);
@@ -122,7 +111,6 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabsIncomeExpense;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.NumericUpDown numudEntries;
         private System.Windows.Forms.Label label1;

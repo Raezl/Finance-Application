@@ -56,8 +56,10 @@ namespace Finance_Application.Views
                     record.UserDetailsUserId = 1;
                     record.PayerPayeePPId = 1;
 
-                    if (threadAddTransaction.IsBusy != true)
+
+                    if (threadAddTransaction.IsBusy != true && control.validation != null)
                         threadAddTransaction.RunWorkerAsync(argument: record);
+                    
                 }
                 
             }

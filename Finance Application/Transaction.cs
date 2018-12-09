@@ -56,12 +56,10 @@ namespace Finance_Application
                     for (int e = 0; e < 6; e++)
                         records.Add(root[i].Attributes[e].Value);
                 }
-                //foreach (XmlAttribute a in att)
-                //Debug.WriteLine(a.Name +" "+a.Value);
             }
             catch (System.IO.FileNotFoundException e)
             {
-                
+                Debug.WriteLine("XML File reader error: " + e);
             }
                 return records;
         }
@@ -97,8 +95,6 @@ namespace Finance_Application
 
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
-
-                System.Windows.Forms.MessageBox.Show(records.Length + " " + columnname.Length);
                 writer.Close();
             }
 

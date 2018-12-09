@@ -32,7 +32,9 @@ namespace Finance_Application
         public virtual UserDetails UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-
+        
+     
+        
         public bool AddPayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
