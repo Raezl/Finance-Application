@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Finance_Application.Views
 {
@@ -103,6 +104,26 @@ namespace Finance_Application.Views
                 
             }
             set { cboxType.SelectedText = value; } }
-        public String PayerPayee { get; set; }
+        public int PayerPayeeId
+        {
+            get
+            {
+                return ((KeyValuePair<int, string>)cboxPayerPayee.SelectedItem).Key;
+            }
+            set{}
+        }
+
+        private void UC_IncomeExpese_Load(object sender, EventArgs e)
+        {
+            List<String> lst = new PayerPayee().ReadPayerPayeeXML();
+            Dictionary<int, string> item = new Dictionary<int, string>();
+            for (int i = 0; i < lst.Count; i += 6)
+            {
+                item.Add(Convert.ToInt32(lst[i]), lst[i + 1]);
+            }
+            cboxPayerPayee.DataSource = new BindingSource(item, null);
+            cboxPayerPayee.DisplayMember = "Value";
+            cboxPayerPayee.ValueMember = "Key";
+        }
     }
 }

@@ -111,6 +111,18 @@
     <Compile Include="Views\Add_IncomeExpense.Designer.cs">
       <DependentUpon>Add_IncomeExpense.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Prediction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Prediction.Designer.cs">
+      <DependentUpon>Prediction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report.Designer.cs">
+      <DependentUpon>Report.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UC_IncomeExpese.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Add_IncomeExpense.resx">
       <DependentUpon>Add_IncomeExpense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Prediction.resx">
+      <DependentUpon>Prediction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report.resx">
+      <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UC_IncomeExpese.resx">
       <DependentUpon>UC_IncomeExpese.cs</DependentUpon>

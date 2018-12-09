@@ -14,6 +14,7 @@ namespace Finance_Application
     using System.Linq;
     using System.Xml;
 
+
     public partial class PayerPayee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,20 +22,17 @@ namespace Finance_Application
         {
             this.Transactions = new HashSet<Transaction>();
         }
-
+    
         public int PPId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string DOB { get; set; }
         public string Email { get; set; }
         public int UserDetailsUserId { get; set; }
-
+    
         public virtual UserDetails UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-        
-     
-        
         public bool AddPayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -83,7 +81,8 @@ namespace Finance_Application
 
         public PayerPayee PPRecord(int id)
         {
-            using (var context = new FinanceEDMContainer()) {
+            using (var context = new FinanceEDMContainer())
+            {
                 return context.PayerPayees.SingleOrDefault(e => e.PPId == id);
             }
         }
@@ -99,10 +98,7 @@ namespace Finance_Application
                 for (int e = 0; e < 6; e++)
                     records.Add(root[i].Attributes[e].Value);
             }
-            //foreach (XmlAttribute a in att)
-            //Debug.WriteLine(a.Name +" "+a.Value);
             return records;
-
         }
 
         public void WritePayerPayeeXML()

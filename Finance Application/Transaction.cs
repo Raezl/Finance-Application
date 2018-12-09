@@ -15,8 +15,10 @@ namespace Finance_Application
     using System.Linq;
     using System.Diagnostics;
 
+
     public partial class Transaction
     {
+
         public int TransactionId { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
@@ -25,19 +27,19 @@ namespace Finance_Application
         public string TransactionType { get; set; }
         public int UserDetailsUserId { get; set; }
         public int PayerPayeePPId { get; set; }
+        public double Amount { get; set; }
     
         public virtual UserDetails UserDetail { get; set; }
         public virtual PayerPayee PayerPayee { get; set; }
 
-       
-
         public bool AddTransaction(Transaction obj)
         {
-            
+
             using (var context = new FinanceEDMContainer())
             {
                 context.Transactions.Add(obj);
-                context.SaveChanges();
+                Debug.WriteLine(obj.PayerPayeePPId);
+                //context.SaveChanges();
             }
             return true;
         }
@@ -50,7 +52,7 @@ namespace Finance_Application
             {
                 xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\" + date + ".xml");
                 XmlNodeList root = xml.GetElementsByTagName("Transaction");
-                
+
                 for (int i = 0; i < root.Count; i++)
                 {
                     for (int e = 0; e < 6; e++)
@@ -61,7 +63,7 @@ namespace Finance_Application
             {
                 Debug.WriteLine("XML File reader error: " + e);
             }
-                return records;
+            return records;
         }
 
         public void WriteTransactionXML(String date)
@@ -84,12 +86,12 @@ namespace Finance_Application
                 {
                     writer.WriteStartElement("Transaction");
 
-                  
+
                     for (int e = 0; e < columnname.Length; e++)
                     {
                         writer.WriteAttributeString(columnname[e], records[i].GetType().GetProperty(columnname[e]).GetValue(records[i]).ToString());
                     }
-                   
+
                     writer.WriteEndElement();
                 }
 
@@ -105,7 +107,7 @@ namespace Finance_Application
         {
             using (var context = new FinanceEDMContainer())
             {
-                var remove = context.Transactions.Where(e=> e.TransactionId == id).Single();
+                var remove = context.Transactions.Where(e => e.TransactionId == id).Single();
                 context.Transactions.Remove(remove);
                 context.SaveChanges();
             }

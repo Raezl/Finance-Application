@@ -56,6 +56,7 @@
     <Property Name="TransactionType" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserDetailsUserId" Type="int" Nullable="false" />
     <Property Name="PayerPayeePPId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
   </EntityType>
   <Association Name="UserDetailsPayerPayee">
     <End Role="UserDetails" Type="FinanceEDM.Store.UserDetails" Multiplicity="1" />
@@ -154,6 +155,7 @@
           <Property Name="UserDetailsUserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PayerPayee" Relationship="FinanceEDM.PayerPayeeTransaction" FromRole="Transaction" ToRole="PayerPayee" />
           <Property Name="PayerPayeePPId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="UserDetailsPayerPayee">
           <End Type="FinanceEDM.UserDetails" Role="UserDetails" Multiplicity="1" />
@@ -232,6 +234,7 @@
           <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
           <ScalarProperty Name="UserDetailsUserId" ColumnName="UserDetailsUserId" />
           <ScalarProperty Name="PayerPayeePPId" ColumnName="PayerPayeePPId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

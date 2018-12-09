@@ -54,12 +54,10 @@ namespace Finance_Application.Views
                     record.Recuring = control.Recuring;
                     record.TransactionType = control.TransactionType;
                     record.UserDetailsUserId = 1;
-                    record.PayerPayeePPId = 1;
-
+                    record.PayerPayeePPId = control.PayerPayeeId;
 
                     if (threadAddTransaction.IsBusy != true && control.validation != null)
                         threadAddTransaction.RunWorkerAsync(argument: record);
-                    
                 }
                 
             }

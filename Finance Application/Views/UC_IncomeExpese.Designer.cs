@@ -217,6 +217,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "UC_IncomeExpese";
             this.Size = new System.Drawing.Size(431, 390);
+            this.Load += new System.EventHandler(this.UC_IncomeExpese_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

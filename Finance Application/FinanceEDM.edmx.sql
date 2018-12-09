@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2018 15:34:13
+-- Date Created: 12/10/2018 02:55:59
 -- Generated from EDMX file: C:\Users\yasirulakruwan\source\repos\Finance Application\Finance Application\FinanceEDM.edmx
 -- --------------------------------------------------
 
@@ -76,7 +76,8 @@ CREATE TABLE [dbo].[Transactions] (
     [Date] nvarchar(max)  NOT NULL,
     [TransactionType] nvarchar(max)  NOT NULL,
     [UserDetailsUserId] int  NOT NULL,
-    [PayerPayeePPId] int  NOT NULL
+    [PayerPayeePPId] int  NOT NULL,
+    [Amount] float  NOT NULL
 );
 GO
 
