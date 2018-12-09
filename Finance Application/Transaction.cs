@@ -29,8 +29,11 @@ namespace Finance_Application
         public virtual UserDetails UserDetail { get; set; }
         public virtual PayerPayee PayerPayee { get; set; }
 
+       
+
         public bool AddTransaction(Transaction obj)
         {
+            
             using (var context = new FinanceEDMContainer())
             {
                 context.Transactions.Add(obj);

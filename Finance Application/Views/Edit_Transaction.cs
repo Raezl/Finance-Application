@@ -13,6 +13,7 @@ namespace Finance_Application.Views
 {
     public partial class Edit_Transaction : Form
     {
+         
         public Edit_Transaction()
         {
             InitializeComponent();

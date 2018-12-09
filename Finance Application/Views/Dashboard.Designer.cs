@@ -36,6 +36,7 @@
             this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnViewPP = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,11 +112,22 @@
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
+            // btnViewPP
+            // 
+            this.btnViewPP.Location = new System.Drawing.Point(54, 182);
+            this.btnViewPP.Name = "btnViewPP";
+            this.btnViewPP.Size = new System.Drawing.Size(111, 23);
+            this.btnViewPP.TabIndex = 5;
+            this.btnViewPP.Text = "View Payer/Payee";
+            this.btnViewPP.UseVisualStyleBackColor = true;
+            this.btnViewPP.Click += new System.EventHandler(this.btnViewPP_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnViewPP);
             this.Controls.Add(this.btnAddPP);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnViewTransaction);
@@ -141,5 +153,6 @@
         private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.Button btnViewPP;
     }
 }

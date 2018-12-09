@@ -47,5 +47,10 @@ namespace Finance_Application.Views
             new Login().Show();
             this.Close();
         }
+
+        private void btnViewPP_Click(object sender, EventArgs e)
+        {
+            new View_PayerPayee().Show();
+        }
     }
 }

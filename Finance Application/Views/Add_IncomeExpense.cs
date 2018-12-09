@@ -39,8 +39,6 @@ namespace Finance_Application.Views
             func(Controls);
         }
         
-        
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             
@@ -96,6 +94,10 @@ namespace Finance_Application.Views
                     newTab.Text = "Record " + tabno;
                     tabsIncomeExpense.TabPages.Add(newTab);
                 }
+            }
+            else
+            {
+
             }
         }
 

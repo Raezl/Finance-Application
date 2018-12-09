@@ -72,11 +72,11 @@ namespace Finance_Application
             }
         }
 
-        public List<String> ReadPayerPayeeXML(String date)
+        public List<String> ReadPayerPayeeXML()
         {
             XmlDocument xml = new XmlDocument();
             xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\PayerPayee.xml");
-            XmlNodeList root = xml.GetElementsByTagName("PayerPayee");
+            XmlNodeList root = xml.GetElementsByTagName("PayersPayees");
             List<String> records = new List<String>();
             for (int i = 0; i < root.Count; i++)
             {
@@ -117,8 +117,6 @@ namespace Finance_Application
                 }
 
                 writer.WriteEndDocument();
-
-
                 writer.Close();
             }
         }
