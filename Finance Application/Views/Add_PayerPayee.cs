@@ -36,7 +36,11 @@ namespace Finance_Application.Views
         private void ThreadAddPayerPayee_DoWork(object sender, DoWorkEventArgs e)
         {
             if (new PayerPayee().AddPayerPayee((PayerPayee)e.Argument))
+            {
+                new PayerPayee().WritePayerPayeeXML();
                 MessageBox.Show("Payer/Payee Added Sucessfully");
+            }
+               
         }
         
     }

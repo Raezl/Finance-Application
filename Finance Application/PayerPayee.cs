@@ -45,23 +45,30 @@ namespace Finance_Application
             return true;
         }
 
-        public bool RemovePayerPayee(PayerPayee obj)
+        public bool RemovePayerPayee(int id)
         {
             using (var context = new FinanceEDMContainer())
             {
-                context.PayerPayees.Remove(obj);
+                var record = context.PayerPayees.Where(e => e.PPId == id).Single();
+                context.PayerPayees.Remove(record);
                 context.SaveChanges();
             }
             return true;
         }
 
-        public void UpdatePayerPayee(int id, PayerPayee obj)
+        public bool UpdatePayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
             {
-                var record = context.PayerPayees.SingleOrDefault(e => e.PPId == id);
-                record = obj;
+                var record = context.PayerPayees.SingleOrDefault(e => e.PPId == obj.PPId);
+                record.Name = obj.Name;
+                record.Address = obj.Address;
+                record.DOB = obj.DOB;
+                record.Email = obj.Email;
+                record.UserDetailsUserId = 1;
+                context.SaveChanges();
             }
+            return true;
         }
 
         public List<PayerPayee> AllPPRecords()
@@ -69,6 +76,13 @@ namespace Finance_Application
             using (var context = new FinanceEDMContainer())
             {
                 return context.PayerPayees.ToList();
+            }
+        }
+
+        public PayerPayee PPRecord(int id)
+        {
+            using (var context = new FinanceEDMContainer()) {
+                return context.PayerPayees.SingleOrDefault(e => e.PPId == id);
             }
         }
 
