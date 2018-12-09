@@ -68,8 +68,10 @@ namespace Finance_Application.Views
         
         private void ThreadAddTransaction_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (new Transaction().AddTransaction((Transaction)e.Argument))
+            Transaction obj = (Transaction)e.Argument;
+            if (obj.AddTransaction(obj))
             {
+                obj.WriteTransactionXML(obj.Date);
                 MessageBox.Show("Record added successfully");
             } 
         }

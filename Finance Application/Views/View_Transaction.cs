@@ -22,28 +22,37 @@ namespace Finance_Application.Views
 
         public void displayRecords(String date)
         {
-            List<String> lst = new Transaction().ReadTransactionXML("2018-12-06");
-            for (int i = 0; i < lst.Count; i += 6)
+            dataGridView1.Rows.Clear();
+            List<String> lst = new Transaction().ReadTransactionXML(date);
+
+            if (lst.Any())
             {
-                dataGridView1.Rows.Add(lst[i], lst[i + 1], lst[i + 2], lst[i + 3], lst[i + 4], lst[i + 5]);
+                for (int i = 0; i < lst.Count; i += 6)
+                {
+                    dataGridView1.Rows.Add(lst[i], lst[i + 1], lst[i + 2], lst[i + 3], lst[i + 4], lst[i + 5]);
+                }
             }
+            else
+            {
+                MessageBox.Show("No Records found for "+date);
+            }
+            
         }
 
         private void dtpTransactionDate_ValueChanged(object sender, EventArgs e)
         {
-           
+            displayRecords(dtpTransactionDate.Value.ToString("yyyy-MM-dd"));
         }
 
         private void View_Transaction_Load(object sender, EventArgs e)
         {
-            
+            displayRecords(dtpTransactionDate.Value.ToString(DateTime.Today.ToString("yyyy-MM-dd")));
         }
 
    
         private void btnModify_Click(object sender, EventArgs e)
         {
             string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["Column6"].Value.ToString();
-          
             Debug.WriteLine(val);
         }
     }

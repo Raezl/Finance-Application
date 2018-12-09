@@ -45,18 +45,25 @@ namespace Finance_Application
         public List<String> ReadTransactionXML(String date)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\" + date+".xml");
-            XmlNodeList root = xml.GetElementsByTagName("Transaction");
             List<String> records = new List<String>();
-            for (int i = 0; i< root.Count; i++)
+            try
             {
-                for (int e = 0; e < 6; e++)
-                    records.Add(root[i].Attributes[e].Value);
+                xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\" + date + ".xml");
+                XmlNodeList root = xml.GetElementsByTagName("Transaction");
+                
+                for (int i = 0; i < root.Count; i++)
+                {
+                    for (int e = 0; e < 6; e++)
+                        records.Add(root[i].Attributes[e].Value);
+                }
+                //foreach (XmlAttribute a in att)
+                //Debug.WriteLine(a.Name +" "+a.Value);
             }
-            //foreach (XmlAttribute a in att)
-               //Debug.WriteLine(a.Name +" "+a.Value);
-            return records;
-
+            catch (System.IO.FileNotFoundException e)
+            {
+                
+            }
+                return records;
         }
 
         public void WriteTransactionXML(String date)
