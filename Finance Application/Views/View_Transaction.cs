@@ -53,6 +53,7 @@ namespace Finance_Application.Views
         private void btnModify_Click(object sender, EventArgs e)
         {
             string val = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells["Column6"].Value.ToString();
+            new Edit_Transaction(Convert.ToInt32(val)).Show();
             Debug.WriteLine(val);
         }
     }

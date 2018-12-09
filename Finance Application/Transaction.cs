@@ -116,7 +116,7 @@ namespace Finance_Application
             return true;
         }
 
-        public void UpdateTransaction(Transaction obj)
+        public bool UpdateTransaction(Transaction obj)
         {
             using (var context = new FinanceEDMContainer())
             {
@@ -130,6 +130,7 @@ namespace Finance_Application
                 record.TransactionType = obj.TransactionType;
                 context.SaveChanges();
             }
+            return true;
         }
 
         public Transaction[] GetTransaction(String Date)
