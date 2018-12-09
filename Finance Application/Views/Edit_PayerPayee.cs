@@ -22,16 +22,31 @@ namespace Finance_Application.Views
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            PayerPayee rec = new PayerPayee();
-            rec.PPId = PPId;
-            rec.Address = txtAddress.Text;
-            rec.Name = txtName.Text;
-            rec.Email = txtEmail.Text;
-            rec.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
-            if (rec.UpdatePayerPayee(rec))
+            if (String.IsNullOrEmpty(txtAddress.Text))
             {
-                rec.WritePayerPayeeXML();
-                MessageBox.Show("Payer/Payee record updated");
+                MessageBox.Show("Address field cannot be empty");
+            }
+            else if (String.IsNullOrEmpty(txtEmail.Text))
+            {
+                MessageBox.Show("Email field cannot be empty");
+            }
+            else if (String.IsNullOrEmpty(txtName.Text))
+            {
+                MessageBox.Show("Name field cannot be empty");
+            }
+            else
+            {
+                PayerPayee rec = new PayerPayee();
+                rec.PPId = PPId;
+                rec.Address = txtAddress.Text;
+                rec.Name = txtName.Text;
+                rec.Email = txtEmail.Text;
+                rec.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
+                if (rec.UpdatePayerPayee(rec))
+                {
+                    rec.WritePayerPayeeXML();
+                    MessageBox.Show("Payer/Payee record updated");
+                }
             }
         }
 
