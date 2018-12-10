@@ -11,6 +11,7 @@ namespace Finance_Application
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Xml;
 
@@ -33,6 +34,8 @@ namespace Finance_Application
         public virtual UserDetails UserDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+
+
         public bool AddPayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -65,6 +68,7 @@ namespace Finance_Application
                 record.Address = obj.Address;
                 record.DOB = obj.DOB;
                 record.Email = obj.Email;
+                //obj.UserDetailsUserId = Session.SessionID;
                 record.UserDetailsUserId = 1;
                 context.SaveChanges();
             }
@@ -90,13 +94,21 @@ namespace Finance_Application
         public List<String> ReadPayerPayeeXML()
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\PayerPayee.xml");
-            XmlNodeList root = xml.GetElementsByTagName("PayersPayees");
             List<String> records = new List<String>();
-            for (int i = 0; i < root.Count; i++)
+            try
             {
-                for (int e = 0; e < 6; e++)
-                    records.Add(root[i].Attributes[e].Value);
+                xml.Load("C:\\Users\\yasirulakruwan\\source\\repos\\Finance Application\\Finance Application\\bin\\Debug\\PayerPayee.xml");
+                XmlNodeList root = xml.GetElementsByTagName("PayersPayees");
+                
+                for (int i = 0; i < root.Count; i++)
+                {
+                    for (int e = 0; e < 6; e++)
+                        records.Add(root[i].Attributes[e].Value);
+                }
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                Debug.WriteLine("XML File reader error: " + e);
             }
             return records;
         }

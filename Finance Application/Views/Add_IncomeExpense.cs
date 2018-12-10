@@ -44,7 +44,8 @@ namespace Finance_Application.Views
             
             if (_IEUControls.Any())
             {
-                Debug.WriteLine("controls"+_IEUControls.Count);
+                String validated = null;
+                List<Transaction> lst = new List<Transaction>();
                 foreach(UC_IncomeExpese control in _IEUControls)
                 {
                     Transaction record = new Transaction();
@@ -53,25 +54,24 @@ namespace Finance_Application.Views
                     record.Description = control.Description;
                     record.Recuring = control.Recuring;
                     record.TransactionType = control.TransactionType;
+                    //obj.UserDetailsUserId = Session.SessionID;
                     record.UserDetailsUserId = 1;
                     record.PayerPayeePPId = control.PayerPayeeId;
-
-                    if (threadAddTransaction.IsBusy != true && control.validation != null)
-                        threadAddTransaction.RunWorkerAsync(argument: record);
+                    validated = control.validation;
+                     if(!String.IsNullOrEmpty(validated))
+                        lst.Add(record);
                 }
-                
+                if (threadAddTransaction.IsBusy != true && !String.IsNullOrEmpty(validated))
+                    threadAddTransaction.RunWorkerAsync(argument: lst);
             }
-
-            
-          
         }
         
         private void ThreadAddTransaction_DoWork(object sender, DoWorkEventArgs e)
         {
-            Transaction obj = (Transaction)e.Argument;
-            if (obj.AddTransaction(obj))
+            List<Transaction> obj = (List<Transaction>)e.Argument;
+            if (new Transaction().AddTransaction(obj))
             {
-                obj.WriteTransactionXML(obj.Date);
+                new Transaction().WriteTransactionXML(obj[0].Date);
                 MessageBox.Show("Record added successfully");
             } 
         }
@@ -99,7 +99,7 @@ namespace Finance_Application.Views
             }
             else
             {
-
+                //
             }
         }
 
