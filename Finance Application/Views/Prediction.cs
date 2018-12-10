@@ -16,5 +16,10 @@ namespace Finance_Application.Views
         {
             InitializeComponent();
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Expense Prediction: " + new Transaction().predict(dateTimePicker1.Value.ToString("yyyy-MM-dd")));
+        }
     }
 }

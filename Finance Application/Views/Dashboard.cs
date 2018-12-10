@@ -53,7 +53,7 @@ namespace Finance_Application.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new Transaction().predict();
+            new Prediction().Show();
         }
     }
 }

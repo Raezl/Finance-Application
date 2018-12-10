@@ -157,31 +157,73 @@ namespace Finance_Application
             }
         }
 
-        public void predict()
+        public double predict(String Date)
         {
             List<double> day = new List<double>();
             List<double> totalTransaction = new List<double>();
             using (var context = new FinanceEDMContainer())
             {
-                day.Add(0);
-                List<Transaction> lst = context.Transactions.ToList().OrderByDescending(e => DateTime.Parse(e.Date)).ToList();
-                for (int i = 0; i < lst.Count - 1; i++)
+                List<Transaction> lst = context.Transactions.Where(e => e.TransactionType == "Expense").ToList().OrderBy(e => DateTime.Parse(e.Date)).ToList();
+                for (int i = 0; i < (lst.Count-1); i++)
                 {
-                    double daydiff = (DateTime.Parse(lst[i].Date) - DateTime.Parse(lst[i + 1].Date)).TotalDays;
+                    double daydiff = (DateTime.Parse(lst[i+1].Date) - DateTime.Parse(lst[i].Date)).TotalDays;
                     if (daydiff != 0)
                     {
+                        day.Add(daydiff);
                         totalTransaction.Add(lst[i].Amount);
                     }
                     else
                     {
-                        if (totalTransaction.Count != 0)
-                            totalTransaction[i] = (lst[i].Amount + lst[i + 1].Amount);
-                        else
-                            totalTransaction.Add(lst[i].Amount + lst[i + 1].Amount);
+                        totalTransaction[totalTransaction.Count-1] = (lst[i].Amount + lst[i + 1].Amount);
                     }
                 }
-                Debug.WriteLine(day.Count);
-                Debug.WriteLine(totalTransaction.Count);
+                Debug.WriteLine("Day c"+day.Count);
+                foreach (double d in day)
+                {
+                    Debug.WriteLine(d);
+                }
+                Debug.WriteLine("Trans c"+totalTransaction.Count);
+                foreach (double t in totalTransaction)
+                {
+                    Debug.WriteLine(t);
+                }
+
+                //y = a +bx
+                //a= (sum(amount)*(sum(day^2))) - (sum(day) * sum(amount *days)) /  lst.count * (sum(day^2)) - sum(amount)*(sum(day^2)
+                //b = lst.count * (sum(amount*days)) - sum(day) *sum(amount)  / lst.count *sum(day^2) - sum(day) ^2
+
+                double amountsqtotal = 0;
+                double amounttotal= 0;
+                
+                foreach (double t in totalTransaction)
+                {
+                    amounttotal += t;
+                    amountsqtotal += Math.Pow(t, 2);
+                }
+
+                double daysqtotal = 0;
+                double daytotal = 0;
+                foreach (double d in day)
+                {
+                    daytotal += d;
+                    daysqtotal += Math.Pow(d, 2);
+                }
+
+                double xytotal = 0;
+                for (int i = 0; i<day.Count ; i++ )
+                {
+                    xytotal += day[i] * totalTransaction[i];
+                }
+                double a = ((amounttotal * daysqtotal) - (daytotal * xytotal)) / ((day.Count * daysqtotal) - (amounttotal * Math.Pow(daytotal, 2)));
+                double b = ((day.Count * xytotal) - (daytotal * amounttotal)) / ((day.Count * daysqtotal) - Math.Pow(daytotal, 2));
+
+                Debug.WriteLine(a + " " + b);
+
+                double y = a + b * (DateTime.Parse(Date) - DateTime.Parse(lst[lst.Count - 1].Date)).TotalDays;
+               
+                Debug.WriteLine(y);
+                return y;
+
             }
         }
     }
