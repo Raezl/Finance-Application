@@ -54,6 +54,7 @@ namespace Finance_Application.Views
                     record.Description = control.Description;
                     record.Recuring = control.Recuring;
                     record.TransactionType = control.TransactionType;
+                    record.Amount = control.Amount;
                     //obj.UserDetailsUserId = Session.SessionID;
                     record.UserDetailsUserId = 1;
                     record.PayerPayeePPId = control.PayerPayeeId;

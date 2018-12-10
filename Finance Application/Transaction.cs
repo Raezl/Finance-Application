@@ -74,7 +74,7 @@ namespace Finance_Application
             {
                 Transaction[] records = GetTransaction(date);
 
-                String[] columnname = { "Category", "Description", "Recuring", "TransactionType", "PayerPayeePPId", "TransactionId" };
+                String[] columnname = { "Category", "Description", "Recuring", "Amount", "TransactionType", "PayerPayeePPId", "TransactionId" };
 
 
                 XmlWriterSettings settings = new XmlWriterSettings();

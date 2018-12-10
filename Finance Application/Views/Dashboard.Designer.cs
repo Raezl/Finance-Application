@@ -36,6 +36,7 @@
             this.updateDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnViewPP = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,11 +112,22 @@
             this.btnViewPP.UseVisualStyleBackColor = true;
             this.btnViewPP.Click += new System.EventHandler(this.btnViewPP_Click);
             // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(276, 41);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 6;
+            this.btnReport.Text = "View Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 207);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.btnViewPP);
             this.Controls.Add(this.btnAddPP);
             this.Controls.Add(this.btnViewTransaction);
@@ -141,5 +153,6 @@
         private System.Windows.Forms.ToolStripMenuItem updateDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.Button btnViewPP;
+        private System.Windows.Forms.Button btnReport;
     }
 }

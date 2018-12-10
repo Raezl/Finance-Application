@@ -36,6 +36,7 @@
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Recuring = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PayerPayeePPId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TransactionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +70,7 @@
             this.Category,
             this.Description,
             this.Recuring,
+            this.Amount,
             this.TransactionType,
             this.PayerPayeePPId,
             this.TransactionId});
@@ -112,6 +114,12 @@
             this.Recuring.HeaderText = "Recuring";
             this.Recuring.Name = "Recuring";
             this.Recuring.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
             // 
             // TransactionType
             // 
@@ -163,6 +171,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Recuring;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn TransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayerPayeePPId;
         private System.Windows.Forms.DataGridViewTextBoxColumn TransactionId;
