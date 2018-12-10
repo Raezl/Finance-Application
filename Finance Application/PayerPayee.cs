@@ -35,7 +35,7 @@ namespace Finance_Application
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
 
-
+        //add a payer or payee to the database
         public bool AddPayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -48,6 +48,7 @@ namespace Finance_Application
             return true;
         }
 
+        //Remove a payeer or payer from the database based on the id 
         public bool RemovePayerPayee(int id)
         {
             using (var context = new FinanceEDMContainer())
@@ -59,6 +60,7 @@ namespace Finance_Application
             return true;
         }
 
+        //update a payer or payee based on the id 
         public bool UpdatePayerPayee(PayerPayee obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -75,6 +77,7 @@ namespace Finance_Application
             return true;
         }
 
+        //get all records 
         public List<PayerPayee> AllPPRecords()
         {
             using (var context = new FinanceEDMContainer())
@@ -83,6 +86,7 @@ namespace Finance_Application
             }
         }
 
+        //get record based on id
         public PayerPayee PPRecord(int id)
         {
             using (var context = new FinanceEDMContainer())
@@ -91,6 +95,8 @@ namespace Finance_Application
             }
         }
 
+
+        //read the xml payer/payee file
         public List<String> ReadPayerPayeeXML()
         {
             XmlDocument xml = new XmlDocument();
@@ -113,6 +119,7 @@ namespace Finance_Application
             return records;
         }
 
+        //Write to payer/payee xml file 
         public void WritePayerPayeeXML()
         {
             using (var context = new FinanceEDMContainer())

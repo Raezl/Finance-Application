@@ -32,6 +32,8 @@ namespace Finance_Application
         public virtual UserDetails UserDetail { get; set; }
         public virtual PayerPayee PayerPayee { get; set; }
 
+
+        //Add a transaction to the database
         public bool AddTransaction(List<Transaction> obj)
         {
 
@@ -45,7 +47,7 @@ namespace Finance_Application
             }
             return true;
         }
-
+        //REad from the transaction xmlfile based on the date
         public List<String> ReadTransactionXML(String date)
         {
             XmlDocument xml = new XmlDocument();
@@ -57,7 +59,7 @@ namespace Finance_Application
 
                 for (int i = 0; i < root.Count; i++)
                 {
-                    for (int e = 0; e < 6; e++)
+                    for (int e = 0; e <= 6; e++)
                         records.Add(root[i].Attributes[e].Value);
                 }
             }
@@ -68,6 +70,7 @@ namespace Finance_Application
             return records;
         }
 
+        //Write all the transactions to the xml file
         public void WriteTransactionXML(String date)
         {
             using (var context = new FinanceEDMContainer())
@@ -105,6 +108,7 @@ namespace Finance_Application
 
 
         }
+        //remove a transaction by id
         public bool RemoveTransaction(int id)
         {
             using (var context = new FinanceEDMContainer())
@@ -116,6 +120,7 @@ namespace Finance_Application
             return true;
         }
 
+        //update the transaction fields
         public bool UpdateTransaction(Transaction obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -133,6 +138,7 @@ namespace Finance_Application
             return true;
         }
 
+        //Get transaction by Date
         public Transaction[] GetTransaction(String Date)
         {
             using (var context = new FinanceEDMContainer())
@@ -148,6 +154,34 @@ namespace Finance_Application
             {
                 Debug.WriteLine(Id);
                 return context.Transactions.Where(e => e.TransactionId == Id).Single();
+            }
+        }
+
+        public void predict()
+        {
+            List<double> day = new List<double>();
+            List<double> totalTransaction = new List<double>();
+            using (var context = new FinanceEDMContainer())
+            {
+                day.Add(0);
+                List<Transaction> lst = context.Transactions.ToList().OrderByDescending(e => DateTime.Parse(e.Date)).ToList();
+                for (int i = 0; i < lst.Count - 1; i++)
+                {
+                    double daydiff = (DateTime.Parse(lst[i].Date) - DateTime.Parse(lst[i + 1].Date)).TotalDays;
+                    if (daydiff != 0)
+                    {
+                        totalTransaction.Add(lst[i].Amount);
+                    }
+                    else
+                    {
+                        if (totalTransaction.Count != 0)
+                            totalTransaction[i] = (lst[i].Amount + lst[i + 1].Amount);
+                        else
+                            totalTransaction.Add(lst[i].Amount + lst[i + 1].Amount);
+                    }
+                }
+                Debug.WriteLine(day.Count);
+                Debug.WriteLine(totalTransaction.Count);
             }
         }
     }

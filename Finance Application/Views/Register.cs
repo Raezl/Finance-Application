@@ -26,7 +26,12 @@ namespace Finance_Application.Views
             usr.DOB = dtpDOB.Value.ToString("yyyy-MM-dd");
             usr.Email = txtEmail.Text;
             usr.Password = txtPassword.Text;
-            usr.AddUser(usr);
+            if (usr.AddUser(usr))
+            {
+                MessageBox.Show("Successful");
+            }
+            else
+                MessageBox.Show("Email already in user.");
         }
     }
 }

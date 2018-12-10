@@ -134,7 +134,6 @@
             this.PayerPayeePPId.HeaderText = "PayerPayeePPId";
             this.PayerPayeePPId.Name = "PayerPayeePPId";
             this.PayerPayeePPId.ReadOnly = true;
-            this.PayerPayeePPId.Visible = false;
             // 
             // TransactionId
             // 

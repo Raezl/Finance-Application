@@ -27,13 +27,7 @@ namespace Finance_Application.Views
         {
             new View_Transaction().Show();
         }
-
         
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
 
         private void btnAddPP_Click(object sender, EventArgs e)
         {
@@ -55,6 +49,11 @@ namespace Finance_Application.Views
         private void btnReport_Click(object sender, EventArgs e)
         {
             new Report().Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Transaction().predict();
         }
     }
 }

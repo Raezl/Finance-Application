@@ -27,9 +27,9 @@ namespace Finance_Application.Views
 
             if (lst.Any())
             {
-                for (int i = 0; i < lst.Count; i += 6)
+                for (int i = 0; i <lst.Count; i += 7)
                 {
-                    dataGridView1.Rows.Add(lst[i], lst[i + 1], lst[i + 2], lst[i + 3], lst[i + 4], lst[i + 5]);
+                    dataGridView1.Rows.Add(lst[i], lst[i + 1], lst[i + 2], lst[i + 3], lst[i + 4], lst[i + 5], lst[i + 6]);
                 }
             }
             else

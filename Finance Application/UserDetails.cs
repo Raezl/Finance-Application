@@ -13,6 +13,7 @@ namespace Finance_Application
     using System.Collections.Generic;
     using System.Linq;
 
+    //Session variable for the loged in user
     public static class Session
     {
         public static int SessionID { get; set; }
@@ -39,6 +40,8 @@ namespace Finance_Application
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
 
+
+        //register new user
         public bool AddUser(UserDetails obj)
         {
             using (var context = new FinanceEDMContainer())
@@ -58,6 +61,7 @@ namespace Finance_Application
             return true;
         }
 
+        //Authenticate user login
         public bool LoginAuthentication(String email, String password)
         {
             using (var context = new FinanceEDMContainer())
